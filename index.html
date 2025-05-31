@@ -48,33 +48,14 @@
     .logo {
       display: flex;
       justify-content: center;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     .logo img {
-      max-height: 120px;
+      height: 100px;
+      width: auto;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-    // Función para enviar resumen por WhatsApp
-    function enviarWhatsApp() {
-      const citacion = document.getElementById('citacion').value;
-      const fecha = document.getElementById('fecha').value || new Date().toLocaleDateString('es-CL');
-      const observaciones = document.getElementById('observaciones').value;
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-      const asistentes = Array.from(checkboxes).map(cb => cb.value);
-      const total = asistentes.length;
-
-      const mensaje =
-        `*Asistencia 5ª Compañía de Bomberos - Villarrica*%0A` +
-        `%0A📌 *Citación:* ${citacion}%0A📅 *Fecha:* ${fecha}%0A` +
-        `📝 *Observaciones:* ${observaciones}%0A👥 *Total asistentes:* ${total}%0A%0A` +
-        `*Asistentes:*%0A${asistentes.map(n => `• ${n}`).join('%0A')}`;
-
-      const url = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
-    }
-
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <div class="logo">
@@ -99,8 +80,6 @@
 
   <button onclick="descargarPDF()">Descargar PDF</button>
 
-  <button onclick="enviarWhatsApp()" style="background-color: #25D366;">Enviar por WhatsApp</button>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const today = new Date().toISOString().split('T')[0];
@@ -116,9 +95,9 @@
       const asistentes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
       const total = asistentes.length;
 
-      let y = 20;
+      let y = 15;
 
-      // Primero el logo para que quede al fondo
+      // Logo centrado arriba
       try {
         const logo = document.getElementById('logoImg');
         const canvas = document.createElement("canvas");
@@ -127,41 +106,37 @@
         const ctx = canvas.getContext("2d");
         ctx.drawImage(logo, 0, 0);
         const logoData = canvas.toDataURL("image/png");
-        doc.addImage(logoData, 'PNG', 160, y, 35, 35);
+        doc.addImage(logoData, 'PNG', 87, y, 35, 35);
+        y += 40;
       } catch (err) {
         console.warn("No se pudo incrustar el logo.");
+        y += 10;
       }
 
-      // Texto
-      doc.setFontSize(18);
+      doc.setFontSize(16);
       doc.setTextColor(179, 0, 0);
       doc.setFont("Helvetica", "bold");
-      doc.text("Asistencia 5ª Compañía de Bomberos - Villarrica", 10, y);
-      y += 10;
-
-      // Línea bajo título pero no sobre el logo
-      y = Math.max(y, 45);  // aseguramos que línea empiece debajo del logo
-      doc.setDrawColor(150);
-      doc.line(10, y, 200, y);
+      doc.text("Asistencia 5ª Compañía de Bomberos - Villarrica", 105, y, { align: "center" });
       y += 8;
+
+      doc.setDrawColor(150);
+      doc.line(10, y, 200, y); y += 7;
 
       doc.setFontSize(12);
       doc.setFont("Helvetica", "normal");
       doc.setTextColor(0, 0, 0);
       doc.text(`Citación: ${citacion}`, 10, y); y += 8;
       doc.text(`Fecha: ${fecha}`, 10, y); y += 8;
-      doc.text(`Observaciones: ${observaciones}`, 10, y); y += 10;
+      doc.setDrawColor(220);
+      doc.line(10, y, 200, y); y += 7;
 
+      doc.text(`Observaciones: ${observaciones}`, 10, y); y += 8;
       doc.setDrawColor(200);
-      doc.line(10, y, 200, y);
-      y += 9;
+      doc.line(10, y, 200, y); y += 9;
 
       doc.setFont("Helvetica", "bold");
       doc.text(`Total asistentes: ${total}`, 10, y); y += 7;
-
-      doc.setDrawColor(220);
-      doc.line(10, y, 200, y);
-      y += 8;
+      doc.line(10, y, 200, y); y += 8;
 
       doc.setFont("Helvetica", "normal");
       doc.text("Asistentes:", 10, y); y += 8;
