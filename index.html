@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Asistencia - Bomberos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #b30000;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    .voluntarios {
+      max-height: 400px;
+      overflow-y: scroll;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #b30000;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 150px;
+      height: auto;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="logo">
+    <img src="https://static.wixstatic.com/media/899a8d_46c6cc2c76424603b5f0ce29b66756c6~mv2.png/v1/fill/w_367,h_398,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/EscudoGermania.png" alt="Escudo 5ta Compañía Villarrica" />
+  </div>
+
+  <h1>Asistencia 5ª Brigada, Villarrica</h1>
+
+  <label for="fecha">Fecha de la citación:</label>
+  <input type="date" id="fecha" />
+
+  <label for="citacion">Nombre de la citación:</label>
+  <input type="text" id="citacion" placeholder="Ej: Curso de cuerdas y escalas" />
+
+  <label for="observaciones">Observaciones de la citación (máx. 250 caracteres):</label>
+  <textarea id="observaciones" maxlength="250" rows="4" placeholder="Escribe alguna observación relevante..."></textarea>
+
+  <label>Subir foto de la actividad (opcional):</label>
+  <input type="file" id="fotoActividad" accept="image/*" />
+
+  <div class="voluntarios">
+    <strong>Marcar asistencia:</strong><br/>
+    <label><input type="checkbox" value="Karam Puali López" /> Karam Puali López</label>
+<label><input type="checkbox" value="Christian Adolfo Vergara Sandoval" /> Christian Adolfo Vergara Sandoval</label>
+<label><input type="checkbox" value="Mathias Von Leyser Jux" /> Mathias Von Leyser Jux</label>
+<label><input type="checkbox" value="René Fernando Navarrete Carvallo" /> René Fernando Navarrete Carvallo</label>
+<label><input type="checkbox" value="Susumu Sugiura Aguilar" /> Susumu Sugiura Aguilar</label>
+<label><input type="checkbox" value="Fernando Aladin Ortega Gutierrez" /> Fernando Aladin Ortega Gutierrez</label>
+<label><input type="checkbox" value="Maria Paz Solo De Zaldivar Lavanchy" /> Maria Paz Solo De Zaldivar Lavanchy</label>
+<label><input type="checkbox" value="Andrés Patricio Herrera Santander" /> Andrés Patricio Herrera Santander</label>
+<label><input type="checkbox" value="Patricio Stephen Sierra Leyton" /> Patricio Stephen Sierra Leyton</label>
+<label><input type="checkbox" value="Javiera Andrea Cubillos Labrín" /> Javiera Andrea Cubillos Labrín</label>
+<label><input type="checkbox" value="Pablo Antonio Arellano Graell" /> Pablo Antonio Arellano Graell</label>
+<label><input type="checkbox" value="Ludwig Heinrich Von Plessing Cea" /> Ludwig Heinrich Von Plessing Cea</label>
+<label><input type="checkbox" value="Rodrigo Enrique Riquelme Matta" /> Rodrigo Enrique Riquelme Matta</label>
+<label><input type="checkbox" value="Diego Lozano González" /> Diego Lozano González</label>
+<label><input type="checkbox" value="Vaslav Alfredo Rubeska Becerra" /> Vaslav Alfredo Rubeska Becerra</label>
+<label><input type="checkbox" value="Magdalena Cortés García" /> Magdalena Cortés García</label>
+<label><input type="checkbox" value="José Rafael Álvarez Álvarez" /> José Rafael Álvarez Álvarez</label>
+<label><input type="checkbox" value="Juan Pablo Gonzalo Orlandini Retamal" /> Juan Pablo Gonzalo Orlandini Retamal</label>
+<label><input type="checkbox" value="Alan Guillermo Rojas Martínez" /> Alan Guillermo Rojas Martínez</label>
+<label><input type="checkbox" value="Luis Alberto Bustos Rivera" /> Luis Alberto Bustos Rivera</label>
+<label><input type="checkbox" value="Cristóbal Paolo Rascheya Travini" /> Cristóbal Paolo Rascheya Travini</label>
+<label><input type="checkbox" value="León Campino" /> León Campino</label>
+<label><input type="checkbox" value="Cesar Alejandro Ilarre Castro" /> Cesar Alejandro Ilarre Castro</label>
+<label><input type="checkbox" value="Tomás Esteban Lara Jeffs" /> Tomás Esteban Lara Jeffs</label>
+<label><input type="checkbox" value="Fernando Emilio Jerez Pantoja" /> Fernando Emilio Jerez Pantoja</label>
+<label><input type="checkbox" value="Matías Corvalán Garrido" /> Matías Corvalán Garrido</label>
+<label><input type="checkbox" value="Natalia Yañez Navarrete" /> Natalia Yañez Navarrete</label>
+<label><input type="checkbox" value="Ignacio Maldonado Avendaño" /> Ignacio Maldonado Avendaño</label>
+<label><input type="checkbox" value="Manuel Francisco Moller Henriquez" /> Manuel Francisco Moller Henriquez</label>
+<label><input type="checkbox" value="Joaquín Ignacio Bustos" /> Joaquín Ignacio Bustos</label>
+  </div>
+
+  <button onclick="enviarAsistencia()">Enviar Asistencia</button>
+  <button onclick="descargarPDF()" style="margin-left:10px; background-color:#555;">Descargar PDF</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('fecha').value = today;
+    });
+
+    function enviarAsistencia() {
+      const fechaManual = document.getElementById('fecha').value;
+      const citacion = document.getElementById('citacion').value;
+      const observaciones = document.getElementById('observaciones').value;
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const asistentes = Array.from(checkboxes).map(cb => cb.value);
+      const total = asistentes.length;
+      const fecha = fechaManual || new Date().toLocaleString('es-CL');
+
+      const resumen = `\n\n📌 Citación: ${citacion}\n📅 Fecha: ${fecha}\n📝 Observaciones: ${observaciones}\n👥 Total asistentes: ${total}\n\n✅ Asistentes:\n- ${asistentes.join('\n- ')}`;
+
+      alert("Resumen generado (falta conectar EmailJS):" + resumen);
+    }
+
+    async function descargarPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const citacion = document.getElementById('citacion').value;
+      const observaciones = document.getElementById('observaciones').value;
+      const fecha = document.getElementById('fecha').value || new Date().toLocaleDateString('es-CL');
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const asistentes = Array.from(checkboxes).map(cb => cb.value);
+      const total = asistentes.length;
+
+      let y = 10;
+      doc.setFontSize(16);
+      doc.setTextColor(179, 0, 0);
+      doc.text("Asistencia 5ª Brigada, Villarrica", 10, y);
+
+      y += 10;
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Citación: ${citacion}`, 10, y);
+      y += 8;
+      doc.text(`Fecha: ${fecha}`, 10, y);
+      y += 8;
+      doc.text(`Observaciones: ${observaciones}`, 10, y);
+      y += 10;
+      doc.text(`Total asistentes: ${total}`, 10, y);
+      y += 10;
+      doc.text("Asistentes:", 10, y);
+      y += 8;
+
+      asistentes.forEach(nombre => {
+        if (y > 280) {
+          doc.addPage();
+          y = 10;
+        }
+        doc.text(`- ${nombre}`, 10, y);
+        y += 7;
+      });
+
+      const nombreArchivo = `Asistencia_${fecha.replace(/\//g, '-')}.pdf`;
+      doc.save(nombreArchivo);
+    }
+  </script>
+</body>
+</html>
