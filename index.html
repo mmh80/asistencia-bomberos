@@ -96,6 +96,7 @@
 
       let y = 20;
 
+      // Primero el logo para que quede al fondo
       try {
         const logo = document.getElementById('logoImg');
         const canvas = document.createElement("canvas");
@@ -104,17 +105,20 @@
         const ctx = canvas.getContext("2d");
         ctx.drawImage(logo, 0, 0);
         const logoData = canvas.toDataURL("image/png");
-        doc.addImage(logoData, 'PNG', 160, 22, 35, 35);
+        doc.addImage(logoData, 'PNG', 160, y, 35, 35);
       } catch (err) {
         console.warn("No se pudo incrustar el logo.");
       }
 
+      // Texto
       doc.setFontSize(18);
       doc.setTextColor(179, 0, 0);
       doc.setFont("Helvetica", "bold");
       doc.text("Asistencia 5ª Compañía de Bomberos - Villarrica", 10, y);
       y += 10;
 
+      // Línea bajo título pero no sobre el logo
+      y = Math.max(y, 45);  // aseguramos que línea empiece debajo del logo
       doc.setDrawColor(150);
       doc.line(10, y, 200, y);
       y += 8;
