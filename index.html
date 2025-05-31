@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Asistencia 5ª Brigada</title>
+  <title>Asistencia 5ª Compañía</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -94,7 +94,7 @@
       const asistentes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
       const total = asistentes.length;
 
-      let y = 15;
+      let y = 20;
 
       try {
         const logo = document.getElementById('logoImg');
@@ -104,7 +104,7 @@
         const ctx = canvas.getContext("2d");
         ctx.drawImage(logo, 0, 0);
         const logoData = canvas.toDataURL("image/png");
-        doc.addImage(logoData, 'PNG', 160, y - 5, 35, 35);
+        doc.addImage(logoData, 'PNG', 160, 22, 35, 35);
       } catch (err) {
         console.warn("No se pudo incrustar el logo.");
       }
@@ -127,17 +127,23 @@
       doc.text(`Observaciones: ${observaciones}`, 10, y); y += 10;
 
       doc.setDrawColor(200);
-      doc.line(10, y, 200, y); y += 7;
+      doc.line(10, y, 200, y);
+      y += 9;
 
       doc.setFont("Helvetica", "bold");
-      doc.text(`Total asistentes: ${total}`, 10, y); y += 9;
+      doc.text(`Total asistentes: ${total}`, 10, y); y += 7;
+
+      doc.setDrawColor(220);
+      doc.line(10, y, 200, y);
+      y += 8;
+
       doc.setFont("Helvetica", "normal");
       doc.text("Asistentes:", 10, y); y += 8;
 
       asistentes.forEach(nombre => {
         if (y > 270) {
           doc.addPage();
-          y = 15;
+          y = 20;
         }
         doc.text("- " + nombre, 15, y);
         y += 7;
