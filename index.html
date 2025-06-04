@@ -113,12 +113,20 @@
       document.getElementById('fecha').value = today;
     });
 
+    function formatearFecha(valor) {
+      if (!valor) {
+        return new Date().toLocaleDateString('es-CL');
+      }
+      const [anio, mes, dia] = valor.split('-');
+      return `${dia}-${mes}-${anio}`;
+    }
+
     function descargarPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       const citacion = document.getElementById('citacion').value;
       const observaciones = document.getElementById('observaciones').value;
-      const fecha = document.getElementById('fecha').value || new Date().toLocaleDateString('es-CL');
+      const fecha = formatearFecha(document.getElementById('fecha').value);
       const asistentes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
       const total = asistentes.length;
 
